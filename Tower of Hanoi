@@ -1,0 +1,24 @@
+//Tower of Hanoi problem
+
+void toh(int n, int src,int aux, int dest, vector<vector<int>>&a){
+   if(n==1)
+   {
+   a.push_back({src,dest});
+   return;
+   }
+   toh(n-1,src,dest,aux,a);
+   a.push_back({src,dest});
+   toh(n-1,aux,src,dest,a);
+}
+
+
+vector<vector<int>> towerOfHanoi(int n)
+{
+   vector<vector<int>> a;
+   int src=1;
+   int aux=2;
+   int dest=3;
+   toh(n,src,aux,dest,a);
+   return a;
+   
+}

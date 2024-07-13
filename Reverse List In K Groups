@@ -1,0 +1,43 @@
+Node* kReverse(Node* head, int k) {
+    if(head==NULL || k==1){
+            return head;
+        }
+        Node* p=head;
+        Node* q=head;
+        Node* ahead=head;
+        for(int i=0;i<k-1;i++){
+                ahead=ahead->next;
+            }
+        int num=0;
+        while(p!=NULL){
+          p=p->next;
+          num++;
+        }
+        int nums=num/k;
+        Node* prev=head;
+
+        while(nums!=0){
+            Node* r=q;
+            Node* temp=q;
+            for(int i=0;i<k;i++){
+                r=r->next;
+            }
+            for(int i=0;i<k;i++){
+                p=q->next;
+                q->next=r;
+                 r=q;
+                q=p;
+               
+            }
+            if(nums!=(num/k)){
+                prev->next=r;
+                prev=temp;
+            }
+            
+            nums--;
+            
+        }
+
+        
+        return ahead;
+}

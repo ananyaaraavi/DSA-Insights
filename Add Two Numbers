@@ -1,0 +1,42 @@
+ListNode* addTwoNumbers(ListNode* num1, ListNode* num2) {
+        ListNode * head=new ListNode(-1);
+        ListNode * head1=head;
+        vector<int> a;
+        vector<int> b;
+        ListNode* p=num1;
+        ListNode* q=num2;
+        int sum=0;
+        int carry=0;
+        
+        while(p!=NULL || q!=NULL || carry!=0){
+            int n1=0;
+            int n2=0;
+            if(p!=NULL){
+                n1=p->val;
+            }
+           if(q!=NULL){
+                n2=q->val;
+            }
+         
+                sum=n1+n2+carry;
+     
+            carry=sum/10;
+            ListNode* temp=new ListNode(sum%10);
+            head1->next=temp;
+            head1=temp;
+            if(p!=NULL){
+                
+                p=p->next;
+            }
+            if(q!=NULL){
+                q=q->next;
+            }
+            
+        }
+
+        ListNode * t=head;
+        head=head->next;
+        delete t;
+        //reverse(head);
+        return head;
+}

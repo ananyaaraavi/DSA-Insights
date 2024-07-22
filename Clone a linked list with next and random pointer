@@ -1,0 +1,20 @@
+Node* copyRandomList(Node* head) {
+        if(head==NULL){
+            return NULL;
+        }
+        map<Node*,Node*> mapp;
+       
+        Node* h = head;
+        while (h != NULL) {
+            mapp[h] = new Node(h->val);
+            h = h->next;
+        }
+
+        h = head;
+        while (h != NULL) {
+            mapp[h]->next = mapp[h->next];
+            mapp[h]->random = mapp[h->random];
+            h = h->next;
+        }
+        return mapp[head];
+}

@@ -1,0 +1,28 @@
+class Solution {
+public:
+
+    void solve(string list,vector<string> &ans,int c1,int c2, int total ){
+        if(list.size()==total){
+            ans.push_back(list);
+            return;
+        }
+        if(c1>c2){
+           solve(list+')',ans,c1,c2+1,total);
+           if(c1<total/2){
+            solve(list+'(',ans,c1+1,c2,total);
+           }
+        }
+        else{
+           solve(list+'(',ans,c1+1,c2,total);
+        }
+
+    }
+
+    vector<string> generateParenthesis(int n) {
+        vector<string> ans;
+        string list="";
+        int total=n+n;
+        solve(list,ans,0,0,total);
+        return ans;
+    }
+};

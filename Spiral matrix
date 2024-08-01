@@ -1,0 +1,30 @@
+int c=matrix[0].size();
+        int r=matrix.size();
+        int sr=0;
+        int sc=c-1;
+        int er=r-1;
+        int ec=0;
+        vector<int> a;
+        while((sr<=er)&&(ec<=sc)){
+            for(int j=ec;j<=sc;j++){
+                 a.push_back(matrix[sr][j]);
+            }
+            sr++;
+            for(int i=sr;i<=er;i++){
+                a.push_back(matrix[i][sc]);
+            }
+            sc--;
+            if(sr<=er){
+            for(int j=sc;j>=ec;j--){
+                a.push_back(matrix[er][j]);
+            }
+            er--;
+            }
+            if(ec<=sc){
+               for(int i=er;i>=sr;i--){
+                a.push_back(matrix[i][ec]);
+            }
+            ec++;
+            }
+        }
+        return a;

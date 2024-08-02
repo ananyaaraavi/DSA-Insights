@@ -1,0 +1,28 @@
+#include <bits/stdc++.h> 
+#include<stack>
+int findMinimumCost(string str) {
+  if(str.size()%2!=0){
+    return -1;
+  }
+  stack<char> s;
+  int count=0;
+  for(int i=0;i<str.size();i++){
+    if(str[i]=='{'){
+      s.push('{');
+    }
+    else{
+      if(s.size()!=0){
+        s.pop();
+      }
+      else{
+        s.push('{');
+        count++;
+      }
+    }
+  }
+  count+=s.size()/2;
+
+    return count;
+  
+  
+}

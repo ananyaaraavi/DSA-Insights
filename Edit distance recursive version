@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int f(int i, int j, const string& str1, const string& str2) {
+    if (i == str1.size()) return str2.size() - j;
+    if (j == str2.size()) return str1.size() - i;
+    if (str1[i] == str2[j]) return f(i + 1, j + 1, str1, str2);
+    return 1 + min(f(i, j + 1, str1, str2), min(f(i + 1, j, str1, str2), f(i + 1, j + 1, str1, str2)));
+}
+ 
+    int minDistance(string str1, string str2) {
+        return f(0, 0, str1, str2);
+    }
+};

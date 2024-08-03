@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+#include<map>
+
+int fib(int n,map<int,int> &m){
+     if(n==0){
+             return 0;
+     }
+     if(n==1){
+             return 1;
+     }
+     if(m.find(n)!=m.end()){
+             return m[n];
+     }
+     m[n]=fib(n-1,m)+fib(n-2,m);
+     return m[n];
+}
+
+int main()
+{
+        int n;
+        cin>>n;
+    map<int,int> m;
+    cout<<fib(n,m);
+    return 0;
+}

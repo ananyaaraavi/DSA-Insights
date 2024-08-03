@@ -1,0 +1,70 @@
+#include <iostream>
+#include <vector>
+#include <set>
+using namespace std;
+
+// Function to perform DFS and collect all node values in a set
+void dfs(int node, vector<vector<int>>& adj, vector<int>& A, vector<bool>& visited, set<int>& values) {
+    visited[node] = true;
+    values.insert(A[node]);
+    for (int neighbor : adj[node]) {
+        if (!visited[neighbor]) {
+            dfs(neighbor, adj, A, visited, values);
+        }
+    }
+}
+
+int countGoodEdges(int N, vector<int>& A, vector<int>& P) {
+    vector<vector<int>> adj(N);
+
+    // Construct adjacency list for the tree
+    for (int i = 1; i < N; ++i) {
+        adj[i].push_back(P[i]);
+        adj[P[i]].push_back(i);
+    }
+
+    int goodEdges = 0;
+
+    // Check each edge to see if it is a good edge
+    for (int i = 1; i < N; ++i) {
+        // Remove edge i <-> P[i] by marking P[i] as visited
+        vector<bool> visited(N, false);
+        visited[P[i]] = true;
+
+        // Collect values in the first subtree
+        set<int> values1;
+        dfs(i, adj, A, visited, values1);
+
+        // Collect values in the second subtree
+        set<int> values2;
+        visited = vector<bool>(N, false);
+        visited[i] = true;
+        dfs(P[i], adj, A, visited, values2);
+
+        // If both sets have distinct values, the edge is good
+        if (both the sets have different value) {
+            goodEdges++;
+        }
+    }
+
+    return goodEdges;
+}
+
+int main() {
+    int N;
+    cin >> N;
+    vector<int> A(N);
+    vector<int> P(N);
+
+    for (int i = 0; i < N; ++i) {
+        cin >> A[i];
+    }
+
+    for (int i = 0; i < N; ++i) {
+        cin >> P[i];
+    }
+
+    cout << countGoodEdges(N, A, P) << endl;
+
+    return 0;
+}

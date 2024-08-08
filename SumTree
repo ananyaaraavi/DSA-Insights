@@ -1,0 +1,28 @@
+int solve(Node* root){
+        if(root==NULL){
+            return 0;
+        }
+        if(root->left==NULL && root->right==NULL){
+            return root->data;
+        }
+
+        int ld=solve(root->left);
+        int rd=solve(root->right);
+        if(root->data==ld+rd){
+            return root->data+ld+rd;
+        }
+        else{
+            return -1;
+        }
+    }  
+  
+    bool isSumTree(Node* root) {
+        if(root==NULL || (root->left==NULL && root->right==NULL)){
+            return true;
+        }
+        int ans=solve(root);
+        if(ans==root->data*2){
+            return true;
+        }
+        return false;
+    }

@@ -1,0 +1,52 @@
+int area(vector<int> a){
+        vector<int> next(a.size());
+        vector<int> prev;
+        stack<int> s;
+        s.push(-1);
+        for(int i=a.size()-1;i>=0;i--){
+            while(!s.empty() && s.top()!=-1 && a[i]<=a[s.top()]){
+                s.pop();
+            }
+            next[i]=s.top();
+            s.push(i);
+        }
+        while(s.top()!=-1){
+            s.pop();
+        }
+        for(int i=0;i<a.size();i++){
+            while(!s.empty() && s.top()!=-1 && a[i]<=a[s.top()]){
+                s.pop();
+            }
+            prev.push_back(s.top());
+            s.push(i);
+        }
+        int max_area=INT_MIN;
+        for(int i=0;i<a.size();i++){
+            int width=next[i]-prev[i]-1;
+            if(next[i]==-1){
+                width=a.size()-prev[i]-1;
+            }
+            max_area=max(max_area,a[i]*width);
+        }
+        return max_area;
+    }
+  
+    int maxArea(int M[MAX][MAX], int n, int m) {
+        vector<int> a(m);
+        for(int i=0;i<m;i++){
+            a[i]=M[0][i];
+        }
+        int max_area=area(a);
+        for(int i=1;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(M[i][j]==0){
+                    a[j]=0;
+                }
+                else{
+                    a[j]=a[j]+M[i][j];
+                }
+            }
+        max_area=max(max_area,area(a));
+        }
+        return max_area;
+    }

@@ -29,7 +29,7 @@ public:
         int max_area=0;
         for(int k=0;k<n;k++){
             if(next_smaller[k]==-1){
-                next_smaller[k]=n;
+                next_smaller[k]=n-prev_smaller[i]-1;
             }
            int width=next_smaller[k]-prev_smaller[k]-1;
            max_area=max(max_area,width*heights[k]);

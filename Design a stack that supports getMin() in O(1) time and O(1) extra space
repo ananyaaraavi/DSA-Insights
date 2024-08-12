@@ -1,0 +1,49 @@
+#include<iostream>
+#include<algorithm>
+#include<stack>
+
+class SpecialStack {
+    public:
+        stack<int> s;
+        int mini=INT_MAX;
+    void push(int data) {
+        if(s.empty()){
+            mini=data;
+            s.push(data);
+        }
+        else{
+            if(data<mini){
+                s.push(2*data - mini);
+                mini=data;
+            }
+            else{
+                s.push(data);
+            }
+        }
+    }
+
+    void pop() {
+        if(s.empty()){
+            return;
+        }
+        if(s.top()<mini){
+            int prev=mini;
+            mini=2*prev-s.top();           
+        }
+        s.pop();
+    }
+
+    int top() {
+        if(s.empty()){
+            return -1;
+        }
+        if(s.top()<mini){
+            return mini;
+        }
+        return s.top();
+    }
+
+    int getMin() {
+        return mini;           
+    }  
+};

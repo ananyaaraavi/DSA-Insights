@@ -1,0 +1,22 @@
+A sum that uses the concept of queues.
+
+int tour(petrolPump p[],int n)
+    {
+//to reduce the traversal to one time we are maintaining the deficit variable so that we can know if the final answer is possible or not 
+       int deficit=0;
+       int balance=0;
+       int start=0;
+       for(int i=0;i<n;i++){
+           balance+=p[i].petrol - p[i].distance;
+//If balance is less than zero then add that negative value to deficit, make balance zero and go to the next i+1 th station. there is no point of going to the next station when we know there would be dificit in later journey
+           if(balance<0){
+               deficit+=balance;
+               start=i+1;
+               balance=0;
+           }
+       }
+       if(deficit+balance>=0){
+           return start;
+       }
+       return -1;
+    }

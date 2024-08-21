@@ -1,0 +1,34 @@
+string FirstNonRepeating(string A){
+		    int i=0;
+		   map<char,int> m;
+		   queue<int> q;
+		   string ans="";
+		   while(i<A.size()){
+		       m[A[i]]+=1;
+           //If q is not empty and if the count is greater than 1 then pop it
+		       if(!q.empty() && m[q.front()]>1){
+		           q.pop();
+		       }
+           //If q is not empty and count is equal to 1 then add it to answer and increment i
+		       else if(!q.empty() && m[q.front()]==1){
+		           ans+=q.front();
+		           if(m[A[i]]==1){
+		               q.push(A[i]);
+		           }
+		           i++;
+		       }
+           //If q is empty check whether the count is 1. If yes add it to answer and push it into the q, else add '#' to answer
+		       if(q.empty()){
+		           if(m[A[i]]==1){
+		               q.push(A[i]);
+		               ans+=A[i];
+		               i++;
+		           }
+		           else{
+		               ans+='#';
+		               i++;
+		           }
+		       }
+		   }
+		   return ans;
+		}

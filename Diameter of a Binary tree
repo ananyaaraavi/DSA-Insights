@@ -1,0 +1,24 @@
+ pair<int, int> solve(Node* root) {
+    if (root == NULL) {
+        return make_pair(0, 0);
+    }
+
+    // Recursively get the diameter and height of the left and right subtrees
+    pair<int, int> left = solve(root->left);
+    pair<int, int> right = solve(root->right);
+
+    int ans1 = left.first;  // Diameter of the left subtree
+    int ans2 = right.first; // Diameter of the right subtree
+    int ans3 = left.second + right.second + 1; // Diameter passing through the root
+
+
+    pair<int, int> ans;
+    ans.first = max(ans1, max(ans2, ans3));
+    ans.second = max(left.second, right.second) + 1;
+
+    return ans;
+}
+
+int diameter(Node* root) {
+    return solve(root).first;
+}

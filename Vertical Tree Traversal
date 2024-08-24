@@ -1,0 +1,35 @@
+vector<int> verticalOrder(Node *root)
+    {
+        map<int,map<int,vector<int>>> m;
+        queue<pair<Node *,pair<int,int>>> q;
+        vector<int> ans;
+        //Inititally for root node horizontal distance is 0 and level is also 0
+       pair<Node *,pair<int,int>> r=make_pair(root,make_pair(0,0));
+       q.push(r);
+       while(!q.empty()){
+            pair<Node *,pair<int,int>> temp=q.front();
+            Node * node=temp.first;
+            q.pop();
+            //accessing values of horizontal distance and level from queue
+            int horizontal_distance=temp.second.first;
+            int level=temp.second.second;
+            
+            //mapping the nodes based on horizontal distance and level
+            m[horizontal_distance][level].push_back(node->data);
+            if(node->left){
+                q.push(make_pair(node->left,make_pair(horizontal_distance-1,level+1)));
+            }
+            if(node->right){
+                q.push(make_pair(node->right,make_pair(horizontal_distance+1,level+1)));
+            }
+            
+       }
+       for(auto i: m){
+           for(auto j:i.second){
+               for(auto k:j.second){
+                   ans.push_back(k);
+               }
+           }
+       }
+       return ans;
+    }

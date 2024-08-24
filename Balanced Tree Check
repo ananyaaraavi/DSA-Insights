@@ -1,22 +1,22 @@
-int solve(Node * root,int &check){
+int solve(TreeNode<int> * root){
         if (root==NULL){
             return 0;
         }
-        int left=solve(root->left,check);
-        int right=solve(root->right,check);
-//If the difference of height of left subtree is less than right subtree then check=0
+        int left=solve(root->left);
+        if(left==-1){
+            return -1;
+        }
+        int right=solve(root->right);
+         if(right==-1){
+            return -1;
+        }
         if(abs(left-right)>1){
-            check=0;
+            return -1;
         }
         return max(left,right)+1;
     }
-    
-    bool isBalanced(Node *root)
-    {
-        int check=1;
-        solve(root,check);
-        if(check){
-            return true;
-        }
-        return false;
-    }
+
+
+bool isBalancedBT(TreeNode<int>* root){
+    return solve(root)!=-1;
+}

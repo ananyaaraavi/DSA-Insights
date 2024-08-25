@@ -10,7 +10,7 @@ void solve(BinaryTreeNode<int>* root,vector<int> &ans,int level){
     }
 
     solve(root->left,ans,level+1);
-    solve(root->right,ans,level+1);
+    solve(root->right,ans,level+1);// If you put this statement above left node's function call then right view for Binary tree is obtained
 }
 
 vector<int> printLeftView(BinaryTreeNode<int>* root) {

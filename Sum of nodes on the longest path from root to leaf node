@@ -1,0 +1,28 @@
+void solve(Node * root, pair<int,int>& s,int summ,int length){
+        if(root==NULL){
+            return;
+        }
+        if(root->left==NULL && root->right==NULL){
+            summ+=root->data;
+            length+=1;
+            if(length>s.first){
+                s.first=length;
+                s.second=summ;
+            }
+            else if(length==s.first){
+                s.second=max(s.second,summ);
+            }
+            return;
+        }
+        summ+=root->data;
+        length+=1;
+        solve(root->left,s,summ,length);
+        solve(root->right,s,summ,length);
+    }
+    
+    int sumOfLongRootToLeafPath(Node *root)
+    {
+       pair<int,int> s=make_pair(0,0);
+       solve(root,s,0,0);
+       return s.second;
+    }

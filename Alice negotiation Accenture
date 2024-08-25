@@ -1,0 +1,45 @@
+Alice is playing a game in which he has been given several strings and has been provided with a list of numbers. Robert would burst a balloon k times. Each time Robert burst a balloon, Robert is to Replace the list numbers by the additive inverse of the number.
+When completed, Alice would get the maximum possible sum of Alice's numbers as prize money. Print the prize money Alice would get.
+
+int solve(vector<int> arr, int k){
+  bool zero=false;
+  for(int i=0;i<arr.size();i++){
+    if(k>0 && arr[i]<0){
+      arr[i]=-arr[i];
+      k--;
+    }
+    if(arr[i]==0){
+      zero=true;
+    }
+  }
+
+  if(k>0 && !zero){
+    sort(arr.begin(),arr.end());
+    while(k>0){
+      arr[0]=-arr[0];
+      k--;
+    }
+  }
+
+  int s=0;
+  for(int i=0;i<arr.size();i++){
+    s+=arr[i];
+  }
+  return s;
+}
+
+int main() {
+    int n;
+    int k;
+    cin>>n;
+    cin>>k;
+    vector<int> arr;
+    for(int i=0;i<n;i++){
+      int num;
+      cin>>num;
+      arr.push_back(num);
+    }  
+
+    int max_sum=solve(arr,k);
+    cout<<max_sum;
+    return 0;

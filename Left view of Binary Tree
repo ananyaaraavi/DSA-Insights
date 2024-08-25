@@ -1,0 +1,57 @@
+//Recursive code (storing if we go to new level)
+
+void solve(BinaryTreeNode<int>* root,vector<int> &ans,int level){
+    if(root==NULL){
+        return;
+    }
+
+    if(level==ans.size()){
+        ans.push_back(root->data);
+    }
+
+    solve(root->left,ans,level+1);
+    solve(root->right,ans,level+1);
+}
+
+vector<int> printLeftView(BinaryTreeNode<int>* root) {
+    vector<int> ans;
+    solve(root,ans,0);
+    return ans;
+}
+
+----------------------------------------------------
+//Using level order traversal (finding storing the first values in every level)
+vector<int> leftView(Node *root)
+{
+    vector<int> ans;
+    if(root==NULL){
+      return ans;
+    }
+    
+    map<int,int> m;
+    queue<pair<Node*,int>> q;
+    
+    q.push(make_pair(root,0));
+    
+    while(!q.empty()){
+        Node * temp=q.front().first;
+        int level=q.front().second;
+        q.pop();
+        
+        if(m.find(level)==m.end()){
+            m[level]=temp->data;
+        }
+        
+        if(temp->left){
+            q.push(make_pair(temp->left,level+1));
+        }
+        if(temp->right){
+            q.push(make_pair(temp->right,level+1));
+        }
+    }
+    for(auto i:m){
+        ans.push_back(i.second);
+    }
+    
+    return ans;
+}

@@ -1,0 +1,86 @@
+A snake in a matrix and a man are also present. Find the number of paths the snake can take to reach the man's location. There is a wall in the path where the snake cannot travel. If the snake can't reach the man's location, return 0. If the snake can reach the man's location, return the number of ways the snake can travel.
+If a man not present or a snake is not present, return 0 also In the input matrix:
+'s' represents the snake's position
+'w' represents the wall position
+'m' represents the man's position
+'p' represents the path on which the snake can move
+The snake can move only in 4 directions: up, down, right, and left.
+
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+    int sx=-1;
+    int sy=-1;
+    int mx=-1;
+    int my=-1;
+void solve(vector<vector<char>> &matrix,int n,int m,int &path,int x,int y,vector<vector<char>> &visited){
+    if(x>n-1 || y>m-1 || x<0 || y<0){
+        return;
+    }
+    if(matrix[x][y]=='w' || visited[x][y]){
+        return;
+    }
+    if(x==mx && y==my){
+        path=path+1;
+        return;
+    }
+     visited[x][y]=true;
+    //up
+    int newx=x-1;
+    int newy=y;
+    solve(matrix,n,m,path,newx,newy,visited);
+        
+    //right
+    newx=x;
+    newy=y+1;
+    solve(matrix,n,m,path,newx,newy,visited);
+
+    //down
+    newx=x+1;
+    newy=y;
+    solve(matrix,n,m,path,newx,newy,visited);
+
+    //left 
+    newx=x;
+    newy=y-1;
+    solve(matrix,n,m,path,newx,newy,visited);
+
+    visited[x][y]=false;
+}
+
+int main() {
+    int n;
+    cin>>n;
+    int m;
+    cin>>m;
+   
+    vector<vector<char>> matrix(n,vector<char>(m));
+    vector<vector<char>> visited(n,vector<char>(m,false));
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            char c;
+            cin>>c;
+            matrix[i][j]=c;
+            if(c=='m'){
+                mx=i;
+                my=j;
+            }
+            if(c=='s'){
+                sx=i;
+                sy=j;
+            }
+        }
+    }
+    int path=0;
+    if(sx==-1 || sy==-1 || mx==-1 ||my==-1){
+        cout<<0;
+        return 0;
+    }
+    solve(matrix,n,m,path,sx,sy,visited);
+    cout<<path;
+    return 0;
+}

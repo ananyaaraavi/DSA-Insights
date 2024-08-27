@@ -29,6 +29,9 @@ void solve(Node * root,int &k,int node,int &ans,bool&found){
 int kthAncestor(Node *root, int k, int node)
 {
     int ans=-1;
+    if(node==root->data){
+       return ans;
+    }
     bool found=false;
     solve(root,k,node,ans,found);
     return ans;

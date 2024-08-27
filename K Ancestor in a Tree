@@ -1,0 +1,35 @@
+void solve(Node * root,int &k,int node,int &ans,bool&found){
+    if(root==NULL){
+        return;
+    }
+    if(root->data==node){
+        found=true;
+        return;
+    }
+  
+    
+    solve(root->left,k,node,ans,found);
+    if(found){
+        k--;
+        if(k==0){
+        ans=root->data;
+        }
+        return;
+    }
+    solve(root->right,k,node,ans,found);
+    if(found){
+        k--;
+        if(k==0){
+        ans=root->data;
+    }
+        return;
+    }
+}
+
+int kthAncestor(Node *root, int k, int node)
+{
+    int ans=-1;
+    bool found=false;
+    solve(root,k,node,ans,found);
+    return ans;
+}

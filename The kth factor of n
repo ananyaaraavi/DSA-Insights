@@ -1,0 +1,22 @@
+class Solution {
+public:
+//less than or equal to O(N)
+    int kthFactor(int n, int k) {
+        int j=k;
+        vector<int> factors;
+        for(int i=1;i<=n;i++){
+            if(n%i==0){
+                factors.push_back(i);
+                j--;
+            }
+            if(j==0){
+                break;
+            }
+        }
+        if(j==0){
+            return factors[factors.size()-1];
+        }
+        return -1;
+        
+    }
+};

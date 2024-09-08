@@ -1,0 +1,21 @@
+string appendAndDelete(string s, string t, int k) {
+       int commonLength = 0;
+    
+    // Find the common prefix length
+    for (int i = 0; i < min(s.size(), t.size()); i++) {
+        if (s[i] == t[i])
+            commonLength++;
+        else
+            break;
+    }
+
+    // Calculate the total number of characters to delete from s and append to make it t
+    int totalChanges = (s.size() - commonLength) + (t.size() - commonLength);
+    
+    // Check if the number of operations is exactly enough, or there are extra moves to make the transformation
+    if (k >= totalChanges && (k - totalChanges) % 2 == 0 || k >= s.size() + t.size()) {
+        return "Yes";
+    } else {
+        return "No";
+    }
+}

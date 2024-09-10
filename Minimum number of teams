@@ -1,0 +1,31 @@
+int fib(int n){
+   if(n==0){
+      return 1;
+   }
+   int res=1;
+   for(int i=2;i<n;i++){
+      res=res*i;
+   }
+   return res;
+}
+
+
+int countTeams(vector<int>& skills, int minPlayers, int minLevel, int maxLevel) {
+    vector<int> eligiblePlayers;
+    for (int skill : skills) {
+        if (skill >= minLevel && skill <= maxLevel) {
+            eligiblePlayers.push_back(skill);
+        }
+    }
+
+    int n = eligiblePlayers.size();
+    if (n < minPlayers) return 0;
+
+    // Counting all possible combinations
+    int totalTeams = 0;
+    for (int i = minPlayers; i <= n; ++i) {
+        totalTeams += fib(n)/fib(n-i)*fib(i); 
+    }
+
+    return totalTeams;
+}

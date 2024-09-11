@@ -1,0 +1,13 @@
+int minCostToEqualizeArray(vector<int>& arr) {
+    int totalCost = 0;
+
+    // Start from the second element and check the difference with the previous one
+    for (int i = 1; i < arr.size(); ++i) {
+        int diff = arr[i] - arr[i - 1]; // Difference with the previous element
+        
+        // The cost is the absolute value of the difference
+        totalCost += abs(diff);
+    }
+
+    return totalCost;
+}

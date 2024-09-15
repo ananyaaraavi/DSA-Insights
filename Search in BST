@@ -1,0 +1,22 @@
+void search(BinaryTreeNode<int> * root, int x,bool &ans){
+    if(root==NULL){
+        return;
+    }
+    if(root->data==x){
+        ans=true;
+        return;
+    }
+    if(root->data>x){
+        search(root->left, x,ans);
+    }
+    else{
+        search(root->right, x, ans);
+    }
+}
+
+
+bool searchInBST(BinaryTreeNode<int> *root, int x) {
+    bool ans=false;
+    search(root,x,ans);
+     return ans;
+}

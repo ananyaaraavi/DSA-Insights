@@ -1,0 +1,23 @@
+Brute force method- Use 3 for loops to get a triplet that satifies the pythogorous theoram
+TC=O(N^3)
+
+Better Solution- Use 2 for loops to iterate over the list and check for the third element using extra space map 
+TC=O(N^2)*log(size of map), SC=O(N)
+
+bool pythagoreanTriplet(vector<int>& arr) {
+        // code here
+        map<int,bool> find_ele;
+        for(int i=0;i<arr.size();i++){
+            for(int j=i+1;j<arr.size();j++){
+                int goal1=(arr[i]*arr[i]) + (arr[j]*arr[j]);
+                int goal2=abs((arr[i]*arr[i]) - (arr[j]*arr[j]));
+                if(find_ele.find(goal1)!=find_ele.end() || find_ele.find(goal2)!=find_ele.end()){
+                    return true;
+                }
+                find_ele[arr[j]*arr[j]]=true;
+            }
+        }
+        return false;
+    }
+
+Optimal Solution- 

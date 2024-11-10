@@ -5,7 +5,6 @@ Better Solution- Use 2 for loops to iterate over the list and check for the thir
 TC=O(N^2)*log(size of map), SC=O(N)
 
 bool pythagoreanTriplet(vector<int>& arr) {
-        // code here
         map<int,bool> find_ele;
         for(int i=0;i<arr.size();i++){
             for(int j=i+1;j<arr.size();j++){
@@ -20,4 +19,65 @@ bool pythagoreanTriplet(vector<int>& arr) {
         return false;
     }
 
-Optimal Solution- 
+Better Solution2- We use 2 pointer approach. We first make the elements squred and then sort them. Later fix the largest element and iterate to find the smaller two numbers that could possible add to be equal to the large number.
+TC=O(N^2) SC=O(1)
+
+bool pythagoreanTriplet(vector<int>& arr) {
+  
+        for(int i=0;i<arr.size();i++){
+            arr[i]=arr[i]*arr[i];
+        }
+        sort(arr.begin(),arr.end());
+        for(int i=arr.size()-1;i>=0;i--){
+            int k=i-1;
+            int j=0;
+            while(k>j){
+                if(arr[k]+arr[j]==arr[i]){
+                    return true;
+                }
+                else if(arr[k]+arr[j]<arr[i]){
+                    j++;
+                }
+                else{
+                    k--;
+                }
+            }
+        }
+       return false;
+    }
+
+Optimal Solution-
+Get the square of elements
+Get the max value of the squared elements
+Create an array of size max+1 and initialize the values to zero, while making the values 1 at the indices of the squared elements
+Using loop iterate through non zero elements and check whether the third elements exists or not.
+TC=O(N+max(arr[i]^2)) SC=O(max(arr[i]^2)
+
+
+bool pythagoreanTriplet(vector<int>& arr) {
+        int maxi=INT_MIN;
+        for(int i=0;i<arr.size();i++){
+            if(arr[i]>maxi){
+                maxi=arr[i];
+            }
+            arr[i]=arr[i]*arr[i];
+        }
+        maxi=maxi*maxi;
+        vector<int> freq(maxi+1,0);
+        for(int i=0;i<arr.size();i++){
+            freq[arr[i]]=1;
+        }
+        for(int i=0;i<freq.size();i++){
+            if(freq[i]==1){
+                for(int j=i+1;j<freq.size();j++){
+                    if(freq[j]==1){
+                        int k=i+j;
+                        if(k<maxi+1 && freq[k]==1){
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+       return false;
+    }

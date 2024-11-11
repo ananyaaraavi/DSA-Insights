@@ -1,0 +1,14 @@
+Given an array arr[ ], your task is to find the minimum number of increment operations required to make all the elements of the array unique. 
+i.e.- no value in the array should occur more than once. In one operation, a value can be incremented by 1 only.
+TC=O(N)  SC=O(1)
+int minIncrements(vector<int>& arr) {
+        int ans=0;
+        sort(arr.begin(),arr.end());
+        for(int i=1;i<arr.size();i++){
+            if(arr[i]<=arr[i-1]){
+                ans+= arr[i-1]-arr[i]+1;
+                arr[i]=arr[i-1]+1;
+            }
+        }
+        return ans;
+    }

@@ -1,0 +1,16 @@
+Given an array arr[][] such that arr[i][0] is the starting time of ith meeting and arr[i][1] is the ending time of ith meeting, the task is to check if it is possible for a person to attend all the meetings such that he can attend only one meeting at a particular time.
+Note: A person can attend a meeting if its starting time is greater than or equal to the previous meeting's ending time.
+TC=O(nlongn) SC=O(logn)(stack space)
+
+bool canAttend(vector<vector<int>> &arr) {
+        // Your Code Here
+        sort(arr.begin(), arr.end(), [](const vector<int>& a, const vector<int>& b) {
+        return a[0] < b[0];
+    });
+    for(int i=0;i<arr.size()-1;i++){
+        if(arr[i][1]>arr[i+1][0]){
+            return false;
+        }
+    }
+    return true;
+    }

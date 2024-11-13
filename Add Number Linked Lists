@@ -1,0 +1,47 @@
+Given two numbers, num1, and num2, represented by linked lists. The task is to return the head of the linked list representing the sum of these two numbers.
+For example, the number 190 will be represented by the linked list, 1->9->0->null, similarly 25 by 2->5->null. Sum of these two numbers is 190 + 25 = 215, which will be represented by 2->1->5->null. You are required to return the head of the linked list 2->1->5->null.
+Note: There can be leading zeros in the input lists, but there should not be any leading zeros in the output list.
+
+
+Node* reverse(Node* h1) {
+    Node* p = NULL;
+    Node* q = h1;
+    while (q != NULL) {
+        Node* qnext = q->next;
+        q->next = p;
+        p = q;
+        q = qnext;
+    }
+    return p;
+}
+
+Node* addTwoLists(Node* num1, Node* num2) {
+    num1 = reverse(num1);
+    num2 = reverse(num2);
+    Node* dummy = new Node(0);
+    Node* temp = dummy;
+    int carry = 0, sum = 0, digit = 0;
+
+    while (num1 != NULL || num2 != NULL || carry != 0) {
+        int v1 = (num1 == NULL) ? 0 : num1->data;
+        int v2 = (num2 == NULL) ? 0 : num2->data;
+        sum = v1 + v2 + carry;
+        digit = sum % 10;
+        carry = sum / 10;
+
+        Node* newNode = new Node(digit);
+        temp->next = newNode;
+        temp = newNode;
+
+        if (num1 != NULL) num1 = num1->next;
+        if (num2 != NULL) num2 = num2->next;
+    }
+
+    Node* result = reverse(dummy->next);
+
+    if (result->data == 0 && result->next != NULL) {
+        result = result->next;
+    }
+
+    return result;
+}

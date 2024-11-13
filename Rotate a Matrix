@@ -1,0 +1,12 @@
+Given a N x N 2D matrix Arr representing an image. Rotate the image by 90 degrees (anti-clockwise direction). You need to do this in place. Note that if you end up using an additional array, you will only receive the partial score.
+
+void rotateMatrix(vector<vector<int>>& arr, int n) {
+	    vector<vector<int>> temp;
+	    temp=arr;
+	    for(int i=0;i<n;i++){
+	        for(int j=0;j<n;j++){
+	            arr[n-j-1][i]=temp[i][j];
+	        }
+	    }
+
+	}

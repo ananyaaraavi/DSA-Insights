@@ -1,0 +1,52 @@
+Serialization is to store a tree in an array so that it can be later restored and deserialization is reading tree back from the array. Complete the functions
+
+serialize() : stores the tree into an array a and returns the array.
+deSerialize() : deserializes the array to the tree and returns the root of the tree.
+
+
+#include <vector>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+const int empty = -1;
+
+void serializeHelper(Node* root, vector<int>& ans) {
+    if (root == NULL) {
+        ans.push_back(empty);
+        return;
+    }
+    ans.push_back(root->data);
+    serializeHelper(root->left, ans);
+    serializeHelper(root->right, ans);
+}
+
+vector<int> serialize(Node* root) {
+    vector<int> ans;
+    serializeHelper(root, ans);
+    return ans;
+}
+
+Node* deserializeHelper(vector<int>& data, int& index) {
+    if (index >= data.size() || data[index] == empty) {
+        index++;
+        return NULL;
+    }
+
+    Node* root = new Node(data[index]);
+    index++;
+    root->left = deserializeHelper(data, index);
+    root->right = deserializeHelper(data, index);
+
+    return root;
+}
+
+Node* deSerialize(vector<int>& A) {
+    int index = 0;
+    return deserializeHelper(A, index);
+}

@@ -1,0 +1,29 @@
+Brute force: Iterate through the array using nested for loops
+
+Optimal Solution: Create a right greater array to store the greatest element on the right
+                  Take two pointers one to iterate through the right greater array and the other one to iterate through the main array
+                  If you find element in right greater array greater than the element in the main array increment j and stor value of j-i, else increment i
+TC=O(n)
+SC=O(n)
+
+int maxIndexDiff(vector<int>& arr) {
+        vector<int> rightmax(arr.size()); 
+        rightmax[arr.size()-1] = arr[arr.size()- 1];
+        
+        for(int i=arr.size()-2;i>=0;i--){
+            rightmax[i]=max(rightmax[i+1],arr[i]);
+        }
+        int ans=INT_MIN;
+        int i=0;
+        int j=0;
+        while(i<arr.size() && j<arr.size()){
+            if(rightmax[j]>=arr[i]){
+                ans=max(ans,j-i);
+                j++;
+            }
+            else{
+                i++;
+            }
+        }
+        return ans;
+    }

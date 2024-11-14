@@ -1,0 +1,13 @@
+Brute force: Using hashmap TC=O(N), SC=O(N)
+Apporach2: Using sum of n numbers TC=O(N), SC=O(1)
+Approach3: Using xor, xor all the elemtents in array and xor all elemnt from 1 to n and xor both will give the missing element 
+
+int missingNumber(vector<int>& arr) {
+        int n=arr.size()+1;
+        int sum=0;
+        for(int i=0;i<arr.size();i++){
+            sum+=arr[i];
+        }
+        int actual=(n*(n+1))/2;
+        return actual-sum;
+    }

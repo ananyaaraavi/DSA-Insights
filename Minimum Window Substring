@@ -1,0 +1,42 @@
+Given two strings s and t of lengths m and n respectively, return the minimum window 
+substring
+ of s such that every character in t (including duplicates) is included in the window. If there is no such substring, return the empty string "".
+TC=O(2N)+O(M)
+SC=O(max(s1,s2))
+
+Optimal Solution: using 2 pointer approach(sliding window)
+
+class Solution {
+public:
+    string minWindow(string s1, string s2) {
+        int l=0;
+        int r=0;
+        int count=0;
+        int len=INT_MAX;
+        int index=-1;
+        unordered_map<char,int> m;
+        for(int i=0;i<s2.size();i++){
+            m[s2[i]]++;
+        }
+        while(r<s1.size()){
+            if(m[s1[r]]>0){
+                count++;
+            }
+            m[s1[r]]=m[s1[r]]-1;
+            while(count==s2.size()){
+                if(r-l+1<len){
+                    index=l;
+                    len=r-l+1;
+
+                }
+                m[s1[l]]=m[s1[l]]+1;
+                if(m[s1[l]]>0){
+                    count--;
+                }
+                l++;
+            }
+            r++;
+        }
+       return index==-1?"":s1.substr(index,len); 
+    }
+};

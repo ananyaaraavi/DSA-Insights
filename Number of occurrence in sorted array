@@ -1,4 +1,5 @@
 int countFreq(vector<int>& arr, int target) {
+TC=O(logn) SC=O(1)
 //using binry search
     int l = lower_bound(arr.begin(), arr.end(), target) - arr.begin();
     int r = upper_bound(arr.begin(), arr.end(), target) - arr.begin();

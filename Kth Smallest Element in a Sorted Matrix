@@ -1,0 +1,33 @@
+Given an n x n matrix where each of the rows and columns is sorted in ascending order, return the kth smallest element in the matrix.
+
+Note that it is the kth smallest element in the sorted order, not the kth distinct element.
+
+You must find a solution with a memory complexity better than O(n2).
+
+TC=O(nlong(n))
+Optimal Solution: Using binary search
+
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& mat, int k) {
+        int l=mat[0][0];
+        int n=mat.size();
+        int h=mat[n-1][n-1];
+        while(l<h){
+            int m=l+(h-l)/2;
+            int count=0;
+            for(int i=0;i<n;i++){
+                int num=upper_bound(mat[i].begin(),mat[i].end(),m) -mat[i].begin();
+                count+=num;
+            }
+            if(count<k){
+                l=m+1;
+            }
+            else{
+                h=m;
+            }
+            
+            }
+            return l;
+    }
+};

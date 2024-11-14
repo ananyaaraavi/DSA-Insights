@@ -1,0 +1,23 @@
+Using 2 pointer approach
+
+int lengthOfLongestSubstring(string s) {
+
+        int ans=0;
+        set<char> m;
+        int l=0;
+        int r=0;
+        while(r<s.size()){         
+            if(m.count(s[r])==0){
+                m.insert(s[r]);
+                ans=max(ans,r-l+1);
+            }else{
+                while(m.count(s[r])){
+                    m.erase(s[l]);
+                    l++;
+                }
+                m.insert(s[r]);
+            } 
+           r++;
+        }
+        return ans;
+    }

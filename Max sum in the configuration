@@ -1,0 +1,17 @@
+Given an integer array(0-based indexing) a of size n. Your task is to return the maximum value of the sum of i*a[i] for all 0<= i <=n-1, where a[i] is the element at index i in the array. The only operation allowed is to rotate(clockwise or counterclockwise) the array any number of times.
+TC=O(N) SC=O(1)
+
+long long max_sum(int a[], int n) {
+        long long total=0;
+        long long curr=0;
+        for(int i=0;i<n;i++){
+            total+=a[i];
+            curr+=(long long)i*a[i];
+        }
+        long long max_s=curr;
+        for(int i=1;i<n;i++){
+            curr=curr+total-(long long)n*a[n-i]; // formula for rotation
+            max_s=max(max_s,curr);
+        }
+        return max_s;
+    }

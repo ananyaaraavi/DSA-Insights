@@ -1,0 +1,23 @@
+TC=O(N) SC=O(1)
+
+vector<int> minAnd2ndMin(vector<int> &arr) {
+        // code here
+        int minn=INT_MAX;
+        for(int i=0;i<arr.size();i++){
+            minn=min(minn,arr[i]);
+        }
+        int sec_min=INT_MAX;
+        for(int i=0;i<arr.size();i++){
+            if(arr[i]>minn){
+                sec_min=min(sec_min,arr[i]);
+            }
+        }
+        vector<int> ans;
+        if(minn!=-1 && sec_min!=INT_MAX){
+            ans.push_back(minn);
+            ans.push_back(sec_min);
+            return ans;
+        }
+        ans.push_back(-1);
+        return ans;
+    }

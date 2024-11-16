@@ -1,0 +1,14 @@
+Given an array arr[]. Push all the zeros of the given array to the right end of the array while maintaining the order of non-zero elements. Do the mentioned change in the array in place.
+ Approach: i indicates left most zero int he array, for every non zero value we swap arr[i] with arr[j] and increment i after swapping
+TC=O(N)
+SC=O(1)
+
+void pushZerosToEnd(vector<int>& arr) {
+        int i=0;
+        for(int j=0;j<arr.size();j++){
+            if(arr[j]!=0){
+                swap(arr[i],arr[j]);
+                i++;
+            }
+        }
+    }
